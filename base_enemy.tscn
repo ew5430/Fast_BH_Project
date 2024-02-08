@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dostoik0n0s6w"]
+
+[ext_resource type="PackedScene" uid="uid://dqe8xadue3a2n" path="res://Utilities/Base_Unit.tscn" id="1_m7gko"]
+[ext_resource type="PackedScene" uid="uid://2gcy8et378vy" path="res://Utilities/search_space.tscn" id="2_rbclh"]
+[ext_resource type="Script" path="res://base_enemy.gd" id="2_tnoyw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yicrt"]
+radius = 19.0
+
+[node name="Base_Enemy" instance=ExtResource("1_m7gko")]
+script = ExtResource("2_tnoyw")
+
+[node name="SearchSpace" parent="." index="3" instance=ExtResource("2_rbclh")]
+
+[node name="CollisionShape2D" parent="SearchSpace" index="0"]
+shape = SubResource("CircleShape2D_yicrt")
+
+[editable path="SearchSpace"]
+[editable path="HurtBox"]

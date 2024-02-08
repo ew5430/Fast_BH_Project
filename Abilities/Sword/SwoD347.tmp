@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj6qnjobqkf1k"]
+
+[ext_resource type="Script" path="res://Abilities/Sword/Sword.gd" id="1_ywhre"]
+
+[node name="Sword" type="Node"]
+script = ExtResource("1_ywhre")
