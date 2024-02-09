@@ -29,9 +29,9 @@ func load_ability(name):
 
 func _on_remove_from_world(object):
 	print(proj_base.get_child_count())
-	""" # Instances only created/cleared on world creation/deletion
-	for i in object.abilities: # Remove unused ability instances once done with them
+	for i in object.abilities: # Track number of things using the ablity singltons
 		in_proj_base[i.name] -= 1
+	""" # Instances only created/cleared on world creation/deletion
 		if in_proj_base[i.name] <= 0:
 			proj_base.find_child(i.name,false,false).queue_free()
 	"""
