@@ -45,7 +45,7 @@ _data = {
 "walk": SubResource("Animation_vfits")
 }
 
-[node name="Player" groups=["friendly"] instance=ExtResource("1_7sjo0")]
+[node name="Player" groups=["friendly", "player"] instance=ExtResource("1_7sjo0")]
 script = ExtResource("2_tbt1r")
 max_hp = 200
 max_mana = 200

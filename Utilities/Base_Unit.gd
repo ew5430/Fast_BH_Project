@@ -6,6 +6,7 @@ extends CharacterBody2D
 
 @export var abilities : Array[Ability_Info]
 var ability_scene : Array[Object]
+var world # Will be world space refernce
 
 @export var max_hp : int
 var curr_hp : int = max_hp
@@ -18,9 +19,9 @@ var curr_mana : int = max_mana
 var move_vec : Vector2 = Vector2.ZERO
 var knock_back_applied : Vector2 = Vector2.ZERO
 
-signal add_to_proj_base(object)
+signal remove_from_world(object)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	velocity = move_vec.normalized() * move_speed # delta not needed since move and sldie already factors in time 
 	knock_back_applied = knock_back_applied.move_toward(Vector2.ZERO, knock_back_recovery)
 	velocity += knock_back_applied
@@ -48,22 +49,18 @@ func _on_hurt_box_hurt(damage, angle, knockback):
 		death()
 	
 func death():
+	emit_signal("remove_from_world",self)
 	queue_free()
-
-func load_ability(name):
-	var scene = load("res://Abilities/" + name + "/" + name + ".tscn")
-	var scenenode = scene.instantiate()
-	emit_signal("add_to_proj_base",scenenode)
-	return scenenode
 
 func reload_abilities():
 	print("Loading abilites for ", self)
 	ability_scene.clear()
 	for i in abilities:
 		print("Adding " + i.name)
-		ability_scene.append(load_ability(i.name))
-		#print("Ability_scene " + str(ability_scene.size()))
+		ability_scene.append(world.load_ability(i.name))
 		
 
-func post_load(): # Load abilites in reload_abilities
+# Setup that occurs after the world scene is fully loaded
+func post_load():
+	world = get_tree().get_first_node_in_group("world")
 	reload_abilities()

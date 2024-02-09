@@ -6,8 +6,7 @@ func _ready():
 
 
 func chaser_ai():
-
 	super()
 	if current_target != null and position.distance_to(current_target.position) < 100:
-		print(self, " is attacking.")
+		print(self, " is attacking. ", current_target)
 		ability_scene[0].execute(self) # Summon a sword

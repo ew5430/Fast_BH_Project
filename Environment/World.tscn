@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Environment/World.gd" id="1_ug3t1"]
 [ext_resource type="PackedScene" uid="uid://cw1im2ibwrppe" path="res://Enemy/sword_skeleton.tscn" id="2_8l36j"]
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" groups=["world"]]
 script = ExtResource("1_ug3t1")
 
 [node name="Physical_Obj_Base" type="Node" parent="." groups=["physical_obj_base"]]
@@ -22,5 +22,3 @@ collision_mask = 1
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 327.0
 offset_bottom = 302.0
-
-[connection signal="add_to_proj_base" from="Entity_Base/Player" to="." method="_on_add_to_proj_base"]
