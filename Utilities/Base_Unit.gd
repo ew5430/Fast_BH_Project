@@ -3,7 +3,6 @@ extends CharacterBody2D
 @onready var sprite = $Sprite2D
 @onready var coll = $CollisionShape2D
 @onready var animation = $AnimationPlayer
-#@onready var projectile_base = get_tree().get_first_node_in_group("projectile_base")
 
 @export var abilities : Array[Ability_Info]
 var ability_scene : Array[Object]
@@ -11,6 +10,7 @@ var ability_scene : Array[Object]
 @export var max_hp : int
 var curr_hp : int = max_hp
 @export var max_mana : int
+@export var mana_regen : int
 var curr_mana : int = max_mana
 @export var armor : int
 @export var move_speed : int
@@ -41,7 +41,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_hurt_box_hurt(damage, angle, knockback):
-	print("Hurt Box Triggered")
+	print("Hurt Box Triggered ", damage," ", angle ," ", knockback," ")
 	knock_back_applied = angle * knockback
 	curr_hp -= clamp(damage - armor, 1, 9999)
 	if curr_hp <= 0:
@@ -57,6 +57,7 @@ func load_ability(name):
 	return scenenode
 
 func reload_abilities():
+	print("Loading abilites for ", self)
 	ability_scene.clear()
 	for i in abilities:
 		print("Adding " + i.name)

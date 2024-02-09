@@ -47,8 +47,9 @@ _data = {
 
 [node name="Player" groups=["friendly"] instance=ExtResource("1_7sjo0")]
 script = ExtResource("2_tbt1r")
-max_hp = 10
-max_mana = 10
+max_hp = 200
+max_mana = 200
+mana_regen = 10
 armor = 1
 move_speed = 200
 knock_back_recovery = 5.0

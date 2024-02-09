@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dostoik0n0s6w"]
+
+[ext_resource type="PackedScene" uid="uid://dqe8xadue3a2n" path="res://Utilities/Base_Unit.tscn" id="1_1sulq"]
+[ext_resource type="Script" path="res://Utilities/base_enemy.gd" id="2_0h1eu"]
+[ext_resource type="PackedScene" uid="uid://2gcy8et378vy" path="res://Utilities/search_space.tscn" id="3_8kjkf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yicrt"]
+radius = 79.0063
+
+[node name="Base_Enemy" instance=ExtResource("1_1sulq")]
+script = ExtResource("2_0h1eu")
+
+[node name="SearchSpace" parent="." index="3" instance=ExtResource("3_8kjkf")]
+
+[node name="CollisionShape2D" parent="SearchSpace" index="0"]
+shape = SubResource("CircleShape2D_yicrt")
+
+[node name="Switch_AI" type="Timer" parent="." index="5"]
+wait_time = 3.0
+
+[connection signal="timeout" from="Switch_AI" to="." method="_on_switch_ai_timeout"]
+
+[editable path="SearchSpace"]
+[editable path="HurtBox"]

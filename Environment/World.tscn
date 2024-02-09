@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://73o10yberub2"]
+[gd_scene load_steps=4 format=3 uid="uid://73o10yberub2"]
 
 [ext_resource type="PackedScene" uid="uid://bw1v4880nbne5" path="res://Player/player.tscn" id="1_no4d0"]
 [ext_resource type="Script" path="res://Environment/World.gd" id="1_ug3t1"]
+[ext_resource type="PackedScene" uid="uid://cw1im2ibwrppe" path="res://Enemy/sword_skeleton.tscn" id="2_8l36j"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_ug3t1")
@@ -9,6 +10,8 @@ script = ExtResource("1_ug3t1")
 [node name="Physical_Obj_Base" type="Node" parent="." groups=["physical_obj_base"]]
 
 [node name="Entity_Base" type="Node" parent="." groups=["entity_base"]]
+
+[node name="Sword Skeleton" parent="Entity_Base" instance=ExtResource("2_8l36j")]
 
 [node name="Player" parent="Entity_Base" instance=ExtResource("1_no4d0")]
 position = Vector2(653, 365)
