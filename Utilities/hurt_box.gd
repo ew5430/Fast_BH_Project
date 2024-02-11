@@ -42,9 +42,6 @@ func _on_area_entered(area):
 			emit_signal("hurt",damage,angle,knock_back)
 			if area.has_method("enemy_hit"):
 				area.enemy_hit(1)
-				
-				
-
 
 func remove_from_list(obj):
 	if hit_once_arr.has(obj):
