@@ -1,15 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqe8xadue3a2n"]
+[gd_scene load_steps=3 format=3 uid="uid://dqe8xadue3a2n"]
 
 [ext_resource type="Script" path="res://Utilities/Base_Unit.gd" id="1_3b2y0"]
 [ext_resource type="PackedScene" uid="uid://b6ptu8qp0cp60" path="res://Utilities/hurt_box.tscn" id="2_leheu"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5p31f"]
-radius = 6.0
-
 [node name="BaseUnit" type="CharacterBody2D"]
-collision_mask = 0
+collision_layer = 0
+collision_mask = 2
 motion_mode = 1
 slide_on_ceiling = false
+platform_floor_layers = 4294967040
+safe_margin = 0.3
 script = ExtResource("1_3b2y0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -19,10 +19,11 @@ script = ExtResource("1_3b2y0")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="HurtBox" parent="." instance=ExtResource("2_leheu")]
-collision_layer = 2
+collision_mask = 6
+hurtboxtype = 3
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-shape = SubResource("CircleShape2D_5p31f")
+shape = null
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 

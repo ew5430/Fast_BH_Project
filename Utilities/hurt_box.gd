@@ -10,6 +10,7 @@ signal hurt(damage,angle,knockback)
 var hit_once_arr = []
 
 func _on_area_entered(area):
+	print("Hurtbox Entered")
 	if area.is_in_group("projectile"):
 		if not area.get("damage") == null:
 			match hurtboxtype:
@@ -41,6 +42,9 @@ func _on_area_entered(area):
 			emit_signal("hurt",damage,angle,knock_back)
 			if area.has_method("enemy_hit"):
 				area.enemy_hit(1)
+				
+				
+
 
 func remove_from_list(obj):
 	if hit_once_arr.has(obj):
@@ -48,3 +52,7 @@ func remove_from_list(obj):
 
 func _on_timer_timeout():
 	coll.call_deferred("set","disabled",false)
+
+
+func _on_body_entered(body):
+	print("temp")

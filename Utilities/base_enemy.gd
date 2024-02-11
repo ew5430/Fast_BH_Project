@@ -28,7 +28,7 @@ func set_target():
 	current_target = min_obj
 
 func chaser_ai():
-	print(self, " is chasing")
+	#print(self, " is chasing")
 	set_target()
 
 func patrol_ai():

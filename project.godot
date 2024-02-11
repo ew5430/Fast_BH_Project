@@ -111,6 +111,10 @@ click={
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="Loot"
 
+[physics]
+
+common/physics_ticks_per_second=240
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

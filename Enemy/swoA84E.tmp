@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cw1im2ibwrppe"]
+[gd_scene load_steps=8 format=3 uid="uid://cw1im2ibwrppe"]
 
 [ext_resource type="PackedScene" uid="uid://dostoik0n0s6w" path="res://Utilities/base_enemy.tscn" id="1_70vxc"]
 [ext_resource type="Script" path="res://Enemy/Sword Skeleton.gd" id="2_8yrcx"]
@@ -44,14 +44,16 @@ _data = {
 "walk": SubResource("Animation_olniu")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5p31f"]
-radius = 6.08276
-
 [node name="Sword Skeleton" instance=ExtResource("1_70vxc")]
+collision_layer = 1
+platform_floor_layers = 4294967295
+safe_margin = 0.08
 script = ExtResource("2_8yrcx")
+abilities = null
 max_hp = 100
 max_mana = 100
 mana_regen = 10
+armor = null
 move_speed = 100
 knock_back_recovery = 50.0
 
@@ -69,13 +71,6 @@ libraries = {
 
 [node name="SearchSpace" parent="." index="3"]
 visible = false
-
-[node name="HurtBox" parent="." index="4"]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
-shape = SubResource("CircleShape2D_5p31f")
 
 [editable path="SearchSpace"]
 [editable path="HurtBox"]
