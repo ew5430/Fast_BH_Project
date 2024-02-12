@@ -6,6 +6,7 @@ extends CharacterBody2D
 
 @export var abilities : Array[Ability_Info]
 var ability_scene : Array[Object]
+var ability_cooldowns : Array[Timer]
 var world # Will be world space refernce
 
 @export var max_hp : int
@@ -54,10 +55,24 @@ func death():
 func reload_abilities():
 	print("Loading abilites for ", self)
 	ability_scene.clear()
-	for i in abilities:
-		print("Adding " + i.name)
-		ability_scene.append(world.load_ability(i.name))
-		
+	for i in ability_cooldowns:
+		i.queue_free()
+	ability_cooldowns.clear()
+	for i in range(abilities.size()):
+		print("Adding " + abilities[i].name)
+		ability_scene.append(world.load_ability(abilities[i].name))
+		var timer = Timer.new()
+		timer.wait_time = abilities[i].cooldown
+		timer.timeout.connect(abilities[i]._timer_timeout)
+		add_child(timer)
+		ability_cooldowns.append(timer)
+
+func use_ability(index):
+	if not abilities[index].on_cd and curr_mana >= abilities[index].mana_cost:
+		ability_scene[index].execute(self)
+		abilities[index]._start_cd()
+		ability_cooldowns[index].start()
+		curr_mana -= abilities[index].mana_cost
 
 # Setup that occurs after the world scene is fully loaded
 func post_load():

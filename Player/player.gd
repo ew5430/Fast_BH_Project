@@ -7,7 +7,7 @@ extends "res://Utilities/Base_Unit.gd"
 
 func _ready():
 	print("Calling player ready")
-	abilities.append(Ability_Info.new("Sword"))
+	abilities.append(Ability_Info.new("Sword", 1))
 
 func _physics_process(delta):
 	player_movement()
@@ -28,7 +28,6 @@ func shoot():
 		else:
 			sprite.flip_h = false
 			
-		for i in ability_scene:
-			#print(i.name)
-			i.execute(self)
+		for i in range(ability_scene.size()):
+			use_ability(i)
 
