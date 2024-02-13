@@ -4,6 +4,7 @@ extends Node2D
 @onready var phys_obj_base = $Physical_Obj_Base
 @onready var entity_base = $Entity_Base
 @onready var proj_base = $Projectile_Base
+@onready var tile_base = $Tile_Base
 @onready var in_proj_base  = {} # Dictonary of attack nodes and how many users
 
 func _ready(): # Need to use postload since ready of children called before ready of parent
