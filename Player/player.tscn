@@ -53,7 +53,6 @@ radius = 7.0
 font_size = 40
 
 [node name="Player" groups=["friendly", "player"] instance=ExtResource("1_7sjo0")]
-collision_mask = 1
 slide_on_ceiling = true
 floor_stop_on_slope = false
 floor_block_on_wall = false

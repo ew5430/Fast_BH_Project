@@ -10,7 +10,7 @@ func execute(s):
 		direction = s.get_local_mouse_position().angle()
 		layer = 3
 	else:
-		direction = s.position.angle_to(s.current_target.position)
+		direction = (s.current_target.position - s.position).angle()
 		layer = 2
 	var new_sword = sword.instantiate()
 	new_sword.config(s,s.position, direction, layer)

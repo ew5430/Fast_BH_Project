@@ -4,8 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://b6ptu8qp0cp60" path="res://Utilities/hurt_box.tscn" id="2_leheu"]
 
 [node name="BaseUnit" type="CharacterBody2D"]
-collision_layer = 0
-collision_mask = 2
 motion_mode = 1
 slide_on_ceiling = false
 platform_floor_layers = 4294967040
