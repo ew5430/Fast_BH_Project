@@ -6,12 +6,16 @@ extends Node2D
 @onready var proj_base = $Projectile_Base
 @onready var tile_base = $Tile_Base
 @onready var in_proj_base  = {} # Dictonary of attack nodes and how many users
+#@onready var 
+
+
 
 func _ready(): # Need to use postload since ready of children called before ready of parent
 	print("Calling Post Load on Entities")
 	for e in entity_base.get_children():
 		e.connect("remove_from_world",_on_remove_from_world)
 		e.post_load()
+	tile_base.generate_chunk(Vector2(0,0))
 
 func load_ability(name):
 	if name not in in_proj_base:
@@ -25,8 +29,6 @@ func load_ability(name):
 		print("Projectile Already in Base ", name)
 		in_proj_base[name] += 1
 		return proj_base.find_child(name,false,false)
-
-
 
 func _on_remove_from_world(object):
 	print("Removing ", object)
