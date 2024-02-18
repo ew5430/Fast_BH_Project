@@ -41,7 +41,7 @@ func _physics_process(_delta):
 	#print(self," ",move_vec)
 	move_and_slide()
 
-func _on_hurt_box_hurt(damage, angle, knockback):
+func _on_hurt_box_hurt(damage: int, angle: Vector2, knockback : float):
 	print("Hurt Box Triggered ", damage," ", angle ," ", knockback," ")
 	knock_back_applied = angle * knockback
 	curr_hp -= clamp(damage - armor, 1, 9999)
@@ -64,10 +64,11 @@ func reload_abilities():
 		var timer = Timer.new()
 		timer.wait_time = abilities[i].cooldown
 		timer.timeout.connect(abilities[i]._timer_timeout)
+		timer.one_shot = true
 		add_child(timer)
 		ability_cooldowns.append(timer)
 
-func use_ability(index):
+func use_ability(index : int):
 	if not abilities[index].on_cd and curr_mana >= abilities[index].mana_cost:
 		ability_scene[index].execute(self)
 		abilities[index]._start_cd()

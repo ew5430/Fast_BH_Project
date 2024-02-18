@@ -9,6 +9,11 @@ var fix_curr_ai : bool = false
 
 @onready var orignal_position : Vector2
 
+@export var spawn_cost : int
+
+func spawn() -> Array[Object]: # Will be overridden in chilren
+	return [null]
+
 func _ready():
 	orignal_position = position
 	#super()

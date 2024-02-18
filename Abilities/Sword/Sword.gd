@@ -2,7 +2,7 @@ extends Node
 
 var sword = preload("res://Abilities/Sword/Sword_Inst.tscn")
 
-func execute(s):
+func execute(s: Object):
 	#print("Execute Called")
 	var direction
 	var layer

@@ -1,13 +1,23 @@
 extends TileMap
 
+enum tile_sets {
+	DUNGEON,
+	WORLD,
+}
+
+enum layers {
+	PHYSICAL,
+	BACKGROUND,
+	FOREGROUND,
+}
+
 var moisture = FastNoiseLite.new()
 var temperature = FastNoiseLite.new()
 var altitude = FastNoiseLite.new()
 
-@export var level_size : Vector2 = Vector2(100,100)
-@export var camera_size : Vector2 = Vector2(100,100)
-@export var rooms_size : Vector2 = Vector2(10, 14)
-@export var rooms_max : int = 15
+
+#@export var rooms_size : Vector2 = Vector2(10, 14)
+#@export var rooms_max : int = 15
 
 
 func _ready():
@@ -15,16 +25,31 @@ func _ready():
 	temperature.seed = randi()
 	altitude.seed = randi()
 	
-func generate_chunk(position):
-	var tile_pos = local_to_map(position)
-	for x in range(level_size.x):
-		for y in range(level_size.y):
-			var moist = moisture.get_noise_2d(tile_pos.x + x, tile_pos.y + y) * 10
-			var temp = temperature.get_noise_2d(tile_pos.x + x, tile_pos.y + y) * 10
-			var alt = altitude.get_noise_2d(tile_pos.x + x, tile_pos.y + y)
-			#set_cell(0, Vector2i(tile_pos.x + x, tile_pos.y + y), 0, Vector2i(1,1))
-			set_cell(0,Vector2i(tile_pos.x + x - camera_size.x / 2, tile_pos.y + y - camera_size.y / 2), 1, Vector2i(round((moist + 10) / 5),round((temp + 10) / 5)))
+func generate_chunk(level_size: Vector2, camera_size: Vector2):
+	var xr = level_size.x
+	var yr = level_size.y
 	
+	var cx = camera_size.x / 2
+	var cy = camera_size.y / 2
+	
+	for x in range(xr):
+		for y in range(yr):
+			var moist = moisture.get_noise_2d(x,  y) * 10
+			var temp = temperature.get_noise_2d(x, y) * 10
+			var alt = altitude.get_noise_2d(x, y)
+			set_cell(layers.BACKGROUND,Vector2i(x - cx, y - cy), tile_sets.WORLD, Vector2i(round((moist + 10) / 5),round((temp + 10) / 5)))
+	
+	
+func unload_chunk(level_size: Vector2, camera_size: Vector2):
+	var xr = level_size.x
+	var yr = level_size.y
+	var cx = camera_size.x / 2
+	var cy = camera_size.y / 2
+	for x in range(xr):
+		for y in range(yr):
+			erase_cell(0,Vector2i(x - cx,y - cy))
+			
+
 """
 func _generate():
 	self.clear()
