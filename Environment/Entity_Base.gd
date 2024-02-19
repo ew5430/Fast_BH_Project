@@ -36,6 +36,10 @@ func spawn_enemies(level_size: Vector2, camera_size: Vector2):
 			fail_match += 1
 
 
-func load_enemy(name : String): # Put enemies into the 
-	var e = load("res://Enemy/" + name + ".tscn")
-	enemies.append(e)
+func load_enemies(biome : String, distance : int): # Put enemies into the enemies list TODO
+	var biome_index = DataContainer.ENEMY_PROPERTIES.find("SpawnInfo") - 1 # Remove 1 since name is ignored
+	for i in DataContainer.ENEMIES: # i is the name of the enemy
+		var enemy_val = DataContainer.ENEMIES[i]
+		# Check if enemy can spawn in this biome, and if we are at right distance
+		if enemy_val[biome_index].has(biome) and distance >= enemy_val[biome_index][biome][0] and distance <= enemy_val[biome_index][biome][1]:
+			enemies.append(load("res://Enemy/" + i + ".tscn"))
