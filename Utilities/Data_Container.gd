@@ -47,14 +47,19 @@ func enemies_parse_multi(index : int, item_list : Array, item_dict : Dictionary)
 			while item_index < item_list.size():
 				item_dict[item_list[item_index]] = Vector2(int(item_list[item_index + 1]), int(item_list[item_index + 2]))
 				item_index += 3
-				return true
+			return true
 		"Abilites":
 			while item_index < item_list.size():
 				item_dict[item_list[item_index]] = true
 				item_index += 1
-				return true
+			return true
 	return false
 
+func get_enemy(name : String) -> Array:
+	return ENEMIES[name]
+
+func get_enemy_property_index(name : String) -> int:
+	return ENEMY_PROPERTIES.find(name) - 1 # Account for removal of name field
 
 func parse_abilites():
 	pass

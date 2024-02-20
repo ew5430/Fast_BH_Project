@@ -16,13 +16,17 @@ func _ready(): # Need to use postload since ready of children called before read
 	print("Loading Data")
 	DataContainer.parse_enemies()
 	
+	print("Generating Level")
+	tile_base.generate_chunk(level_size,camera_size)
+	print("Spawning Entites")
+	entity_base.spawn_player(Vector2(0,0))
+	entity_base.load_enemies("Forest",0)
+	entity_base.spawn_enemies(level_size,camera_size)
+	
 	print("Calling Post Load on Entities")
 	for e in entity_base.get_children():
 		e.connect("remove_from_world",_on_remove_from_world)
 		e.post_load()
-	tile_base.generate_chunk(level_size,camera_size)
-	entity_base.load_enemies("Forest",0)
-	entity_base.spawn_enemies(level_size,camera_size)
 	#tile_base.unload_chunk(level_size,camera_size)
 
 func load_ability(name : String):

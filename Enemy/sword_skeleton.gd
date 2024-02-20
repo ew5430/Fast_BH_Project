@@ -1,4 +1,4 @@
-extends "res://Utilities/base_enemy.gd"
+extends "res://Utilities/Base_Enemy.gd"
 
 func _ready():
 	print("Calling ready from ", self)
