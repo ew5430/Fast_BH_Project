@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bw1v4880nbne5"]
+[gd_scene load_steps=10 format=3 uid="uid://bw1v4880nbne5"]
 
 [ext_resource type="PackedScene" uid="uid://dqe8xadue3a2n" path="res://Utilities/Base_Unit.tscn" id="1_7sjo0"]
 [ext_resource type="Script" path="res://Player/player.gd" id="2_tbt1r"]
 [ext_resource type="Texture2D" uid="uid://d1aytfpa2k452" path="res://Textures/Dungeon/Character_animation/priests_idle/priest1/v2/spritesheet.png" id="3_wqt87"]
-[ext_resource type="Script" path="res://Utilities/Time.gd" id="4_j5jig"]
+[ext_resource type="PackedScene" uid="uid://cxv0mhwhdnvat" path="res://Menus_and _GUI/GUI.tscn" id="4_4dool"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1o5wy"]
 radius = 6.0
@@ -49,9 +49,6 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_w4hgm"]
 radius = 7.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_gvip8"]
-font_size = 40
-
 [node name="Player" groups=["friendly", "player"] instance=ExtResource("1_7sjo0")]
 slide_on_ceiling = true
 floor_stop_on_slope = false
@@ -82,21 +79,8 @@ collision_mask = 2
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("CircleShape2D_w4hgm")
 
-[node name="Camera2D" type="Camera2D" parent="." index="4"]
+[node name="GUI" parent="." index="4" instance=ExtResource("4_4dool")]
 
-[node name="Time" type="Label" parent="Camera2D" index="0"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 527.0
-offset_top = -354.0
-offset_right = 632.0
-offset_bottom = -291.0
-grow_vertical = 0
-text = "00:00"
-label_settings = SubResource("LabelSettings_gvip8")
-horizontal_alignment = 2
-script = ExtResource("4_j5jig")
-base_time = 900
+[node name="Camera2D" type="Camera2D" parent="." index="5"]
 
 [editable path="HurtBox"]

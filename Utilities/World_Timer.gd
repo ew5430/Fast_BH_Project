@@ -3,12 +3,15 @@ extends Label
 @export var base_time : int
 @onready var pass_time = base_time
 
-signal time_checkpoint_hit(curr_time) # TODO: Things change over time
+signal time_checkpoint_hit(curr_time) # TODO: Things change over time, link this up to various things
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass_time -= delta
-	change_time()
+	if pass_time <= 0:
+		self.text = str("--:--")
+	else:
+		pass_time -= delta
+		change_time()
 
 func change_time():
 	var time = int(pass_time)

@@ -49,7 +49,6 @@ radius = 6.08276
 
 [node name="Sword Skeleton" instance=ExtResource("1_70vxc")]
 script = ExtResource("2_8yrcx")
-spawn_cost = 0
 max_hp = 100
 max_mana = 100
 mana_regen = 10

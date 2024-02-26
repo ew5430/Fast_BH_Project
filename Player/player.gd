@@ -19,7 +19,6 @@ func player_movement():
 	var ymov = Input.get_action_strength("down") - Input.get_action_strength("up")
 
 	move_vec = Vector2(xmov,ymov)
-	
 func shoot():
 	if Input.is_action_pressed("click"):
 		var mouse_pos = get_viewport().get_mouse_position()

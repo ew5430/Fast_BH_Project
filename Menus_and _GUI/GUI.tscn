@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxv0mhwhdnvat"]
+
+[ext_resource type="Script" path="res://Menus_and _GUI/GUI.gd" id="1_7jb7y"]
+[ext_resource type="Script" path="res://Utilities/World_Timer.gd" id="2_rsvyd"]
+[ext_resource type="Script" path="res://Minimap.gd" id="3_8unhm"]
+[ext_resource type="Texture2D" uid="uid://chy02cqleg8l1" path="res://Textures/Dungeon/interface/square_left_2_4.png" id="4_f8nkw"]
+
+[sub_resource type="Gradient" id="Gradient_seg78"]
+colors = PackedColorArray(0.392157, 0.392157, 0.392157, 1, 0.392157, 0.392157, 0.392157, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bt41s"]
+gradient = SubResource("Gradient_seg78")
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_7jb7y")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="World_Timer" type="Label" parent="Control"]
+offset_left = 1164.0
+offset_top = 14.0
+offset_right = 1267.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 40
+text = "00:00"
+horizontal_alignment = 2
+script = ExtResource("2_rsvyd")
+base_time = 900
+
+[node name="Minimap" type="MarginContainer" parent="Control"]
+offset_left = 18.0
+offset_top = 16.0
+offset_right = 158.0
+offset_bottom = 156.0
+script = ExtResource("3_8unhm")
+
+[node name="Frame" type="NinePatchRect" parent="Control/Minimap"]
+layout_mode = 2
+texture = ExtResource("4_f8nkw")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/Minimap"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TextureRect" type="TextureRect" parent="Control/Minimap/MarginContainer"]
+layout_mode = 2
+texture = SubResource("GradientTexture1D_bt41s")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="MapNodes" type="TileMap" parent="Control/Minimap/MarginContainer"]
+format = 2

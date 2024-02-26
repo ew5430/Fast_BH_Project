@@ -48,7 +48,7 @@ func ai_control(): # TODO: How to properly do intelligent AI
 		chaser_ai()
 	if current_target == null and not fix_curr_ai:
 		patrol_ai()
-		switch_ai.start()
+		switch_ai.start(switch_ai.wait_time + randi_range(-2,2))
 		fix_curr_ai = true
 
 
@@ -57,5 +57,8 @@ func _on_switch_ai_timeout():
 
 func _physics_process(delta):
 	ai_control()
-	move_vec = self.position.direction_to(move_target)
+	if self.position.distance_to(move_target) < 1: # Stop jittering when extremely close to target
+		move_vec = Vector2.ZERO
+	else:
+		move_vec = self.position.direction_to(move_target)
 	super(delta)

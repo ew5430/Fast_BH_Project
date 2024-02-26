@@ -6,11 +6,12 @@ extends Node2D
 @onready var proj_base = $Projectile_Base
 @onready var tile_base = $Tile_Base
 @onready var in_proj_base  = {} # Dictonary of attack nodes and how many users
-#@onready var 
+
 
 @export var level_size : Vector2 = Vector2(100,100)
 @export var camera_size : Vector2 = Vector2(100,100)
 
+var player : Object
 
 func _ready(): # Need to use postload since ready of children called before ready of parent
 	print("Loading Data")
@@ -27,6 +28,7 @@ func _ready(): # Need to use postload since ready of children called before read
 	for e in entity_base.get_children():
 		e.connect("remove_from_world",_on_remove_from_world)
 		e.post_load()
+	player = entity_base.get_child(0) # player will always be first child since spawned first
 	#tile_base.unload_chunk(level_size,camera_size)
 
 func load_ability(name : String):
@@ -54,3 +56,6 @@ func _on_remove_from_world(object: Object):
 	"""
 	# queue free will automaticly remove from entity base
 	#print(entity_base.get_child_count())
+	
+func _physics_process(delta):
+	pass

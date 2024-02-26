@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://73o10yberub2"]
+[gd_scene load_steps=11 format=3 uid="uid://73o10yberub2"]
 
 [ext_resource type="Script" path="res://Environment/World.gd" id="1_ug3t1"]
 [ext_resource type="Texture2D" uid="uid://30eoyrovnhqk" path="res://Textures/tiles2.png" id="3_kgivs"]
 [ext_resource type="Script" path="res://Environment/Tile_Base.gd" id="3_kxxga"]
 [ext_resource type="Texture2D" uid="uid://csmh6yii4xopt" path="res://Textures/Dungeon/Dungeon_Tileset.png" id="4_8ri4d"]
+[ext_resource type="Script" path="res://Menus_and _GUI/World_Map.gd" id="5_k88u3"]
 [ext_resource type="Script" path="res://Environment/Entity_Base.gd" id="5_yo4ob"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_58n8i"]
@@ -333,6 +334,10 @@ layer_2/name = "Foreground"
 layer_2/z_index = 1
 layer_2/tile_data = PackedInt32Array()
 script = ExtResource("3_kxxga")
+
+[node name="World_Map" type="TileMap" parent="."]
+format = 2
+script = ExtResource("5_k88u3")
 
 [node name="Physical_Obj_Base" type="Node" parent="." groups=["physical_obj_base"]]
 
