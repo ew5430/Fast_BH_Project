@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bfpyyxl3pptin"]
 
-[ext_resource type="Script" path="res://Menus_and _GUI/Button.gd" id="1_dxkr5"]
+[ext_resource type="Script" path="res://Menus_and_GUI/Button.gd" id="1_dxkr5"]
 [ext_resource type="AudioStream" uid="uid://cwkd1lrd2pkcy" path="res://Audio/GUI/click.wav" id="2_ojdn7"]
 
 [node name="Button" type="Button"]

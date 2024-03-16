@@ -52,7 +52,7 @@ script = ExtResource("2_8yrcx")
 max_hp = 100
 max_mana = 100
 mana_regen = 10
-move_speed = 100
+base_speed = 150
 knock_back_recovery = 50.0
 
 [node name="Sprite2D" parent="." index="0"]

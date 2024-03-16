@@ -1,7 +1,7 @@
 extends Node
 
 @onready var player = preload("res://Player/player.tscn")
-@export var spawn_power : int = 15
+@export var spawn_power : int = 0
 @onready var enemies : Array[Object] = [] # Store the possible enemies to spawn in an array
 @onready var enemy_names : Array[String] = []
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cxv0mhwhdnvat"]
 
-[ext_resource type="Script" path="res://Menus_and _GUI/GUI.gd" id="1_7jb7y"]
+[ext_resource type="Script" path="res://Menus_and_GUI/GUI.gd" id="1_7jb7y"]
 [ext_resource type="Script" path="res://Utilities/World_Timer.gd" id="2_rsvyd"]
-[ext_resource type="Script" path="res://Minimap.gd" id="3_8unhm"]
+[ext_resource type="Script" path="res://Menus_and_GUI/Minimap.gd" id="3_8unhm"]
 [ext_resource type="Texture2D" uid="uid://chy02cqleg8l1" path="res://Textures/Dungeon/interface/square_left_2_4.png" id="4_f8nkw"]
 
 [sub_resource type="Gradient" id="Gradient_seg78"]
@@ -24,7 +24,19 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 
+[node name="Score" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 548.0
+offset_top = 21.0
+offset_right = 756.0
+offset_bottom = 63.0
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="World_Timer" type="Label" parent="Control"]
+layout_mode = 0
 offset_left = 1164.0
 offset_top = 14.0
 offset_right = 1267.0
@@ -36,6 +48,7 @@ script = ExtResource("2_rsvyd")
 base_time = 900
 
 [node name="Minimap" type="MarginContainer" parent="Control"]
+layout_mode = 0
 offset_left = 18.0
 offset_top = 16.0
 offset_right = 158.0
@@ -53,11 +66,8 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="TextureRect" type="TextureRect" parent="Control/Minimap/MarginContainer"]
+[node name="BackGround" type="TextureRect" parent="Control/Minimap/MarginContainer"]
 layout_mode = 2
 texture = SubResource("GradientTexture1D_bt41s")
 expand_mode = 1
 stretch_mode = 1
-
-[node name="MapNodes" type="TileMap" parent="Control/Minimap/MarginContainer"]
-format = 2

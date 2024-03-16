@@ -3,21 +3,14 @@ extends TileMap
 enum tile_sets {
 	DUNGEON,
 	WORLD,
-}
-
-enum layers {
-	PHYSICAL,
-	BACKGROUND,
-	FOREGROUND,
+	TERRAIN,
 }
 
 var moisture = FastNoiseLite.new()
 var temperature = FastNoiseLite.new()
 var altitude = FastNoiseLite.new()
 
-
-#@export var rooms_size : Vector2 = Vector2(10, 14)
-#@export var rooms_max : int = 15
+const EXIT_TILE : Vector2i = Vector2i(4,0)
 
 
 func _ready():
@@ -37,8 +30,15 @@ func generate_chunk(level_size: Vector2, camera_size: Vector2):
 			var moist = moisture.get_noise_2d(x,  y) * 10
 			var temp = temperature.get_noise_2d(x, y) * 10
 			var alt = altitude.get_noise_2d(x, y)
-			set_cell(layers.BACKGROUND,Vector2i(x - cx, y - cy), tile_sets.WORLD, Vector2i(round((moist + 10) / 5),round((temp + 10) / 5)))
-	
+			set_cell(DataContainer.tile_layers.BACKGROUND,Vector2i(x - cx, y - cy), tile_sets.WORLD, Vector2i(round((moist + 10) / 5),round((temp + 10) / 5)))
+	# Generate world borders
+	for x in range(-1,xr+1):
+		set_cell(DataContainer.tile_layers.BACKGROUND,Vector2i(x - cx, yr - cy),tile_sets.WORLD, EXIT_TILE)
+		set_cell(DataContainer.tile_layers.BACKGROUND,Vector2i(x - cx, -cy - 1),tile_sets.WORLD, EXIT_TILE)
+	for y in range(-1,yr+1):
+		set_cell(DataContainer.tile_layers.BACKGROUND,Vector2i(xr - cx, y - cy),tile_sets.WORLD, EXIT_TILE)
+		set_cell(DataContainer.tile_layers.BACKGROUND,Vector2i(-cx - 1, y - cy),tile_sets.WORLD, EXIT_TILE)
+		
 	
 func unload_chunk(level_size: Vector2, camera_size: Vector2):
 	var xr = level_size.x
@@ -48,9 +48,11 @@ func unload_chunk(level_size: Vector2, camera_size: Vector2):
 	for x in range(xr):
 		for y in range(yr):
 			erase_cell(0,Vector2i(x - cx,y - cy))
-			
+
 
 """
+@export var rooms_size : Vector2 = Vector2(10, 14)
+@export var rooms_max : int = 15
 func _generate():
 	self.clear()
 	for vector in _generate_data():

@@ -30,3 +30,8 @@ func shoot():
 		for i in range(ability_scene.size()):
 			use_ability(i)
 
+func apply_tile_effect(tile_type : int):
+	match tile_type:
+		0:
+			return # TODO: move to new chunk
+	super(tile_type) 

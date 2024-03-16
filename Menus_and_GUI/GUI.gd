@@ -1,15 +1,15 @@
 extends CanvasLayer
 class_name GUI
 
-@onready var score_label = $Control/MarginContainer/Score
-@onready var timer = $Control/MarginContainer/Timer
+@onready var score_label = $Control/Score
+@onready var timer = $Control/World_Timer
 
 var score = 0:
 	set(new_score):
 		score = new_score
 		update_score_label()
-		
-		
+
+
 func  update_score_label():
 	score_label = str(score)
 

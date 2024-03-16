@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dqe8xadue3a2n" path="res://Utilities/Base_Unit.tscn" id="1_7sjo0"]
 [ext_resource type="Script" path="res://Player/player.gd" id="2_tbt1r"]
 [ext_resource type="Texture2D" uid="uid://d1aytfpa2k452" path="res://Textures/Dungeon/Character_animation/priests_idle/priest1/v2/spritesheet.png" id="3_wqt87"]
-[ext_resource type="PackedScene" uid="uid://cxv0mhwhdnvat" path="res://Menus_and _GUI/GUI.tscn" id="4_4dool"]
+[ext_resource type="PackedScene" uid="uid://cxv0mhwhdnvat" path="res://Menus_and_GUI/GUI.tscn" id="4_4dool"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1o5wy"]
 radius = 6.0
@@ -58,7 +58,7 @@ max_hp = 200
 max_mana = 200
 mana_regen = 10
 armor = 1
-move_speed = 200
+base_speed = 200
 knock_back_recovery = 5.0
 
 [node name="Sprite2D" parent="." index="0"]

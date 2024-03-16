@@ -3,6 +3,12 @@ extends Node
 # Reference for how to import CSV into godot
 # https://github.com/godotengine/godot/issues/19627
 
+enum tile_layers {
+	BACKGROUND,
+	PHYSICAL,
+	DESTRUCTIBLE,
+	FOREGROUND,
+}
 
 @onready var ENEMIES = {}
 var ENEMY_PROPERTIES : Array
