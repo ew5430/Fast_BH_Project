@@ -20,19 +20,20 @@ func spawn_enemies(curr_chunk : Vector2, level_size: Vector2, camera_size: Vecto
 				e.set_properties(i) # TODO: create set properties function
 				add_child(e)
 	else:
+		var curr_spawn_power = spawn_power
 		var start_index : int = randi_range(0,enemy_names.size() - 1)
 		var curr_index : int = start_index
 		var fail_match : int = 0
-		while spawn_power > 0 and fail_match < 2:
+		while curr_spawn_power > 0 and fail_match < 2:
 			# TODO: Find out how to properly call functions on loaded scenes
 			var curr_enemy : Array = DataContainer.get_enemy(enemy_names[curr_index])
 			var curr_enemy_spawn_cost : int = int(curr_enemy[DataContainer.get_enemy_property_index("SpawnCost")])
-			if curr_enemy_spawn_cost <= spawn_power:
+			if curr_enemy_spawn_cost <= curr_spawn_power:
 				# Spawn the chosen enemy a random number of times
-				var times = int(spawn_power / curr_enemy_spawn_cost)
+				var times = int(curr_spawn_power / curr_enemy_spawn_cost)
 				times -= randi_range(0,int(times / 3))
 				times = max(times,1)
-				spawn_power -= curr_enemy_spawn_cost * times
+				curr_spawn_power -= curr_enemy_spawn_cost * times
 				for i in range(times):
 					var spawn_loc : Vector2 = Vector2(randi_range(0,level_size.x) - camera_size.x, randi_range(0,level_size.y) - camera_size.y)
 					

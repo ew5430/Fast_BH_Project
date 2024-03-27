@@ -35,7 +35,7 @@ func _ready(): # Need to use postload since ready of children called before read
 	player = entity_base.get_child(0) # player will always be first child since spawned first
 	#tile_base.unload_chunk(level_size,camera_size)
 
-func load_ability(name : String):
+func load_ability(name : String): # Add possible abilites to in_proj_base and proj_base
 	if name not in in_proj_base:
 		print("Loading new projectile ", name)
 		var scene = load("res://Abilities/" + name + "/" + name + ".tscn")
@@ -50,21 +50,14 @@ func load_ability(name : String):
 
 func _on_remove_from_world(object: Object):
 	print("Removing ", object)
-	#print(proj_base.get_child_count())
 	for i in object.abilities: # Track number of things using the ablity singltons
 		in_proj_base[i.name] -= 1
 
-	""" # Instances only created/cleared on world creation/deletion
-		if in_proj_base[i.name] <= 0:
-			proj_base.find_child(i.name,false,false).queue_free()
-	"""
-	# queue free will automaticly remove from entity base
-	#print(entity_base.get_child_count())
 	
 func _physics_process(delta):
 	pass
 
-func create_new_chunk(move_vec : Vector2):
+func create_new_chunk(move_vec : Vector2): # Load new chunk when player moves into it
 	print("Changing tiles")
 	
 	# for position, the cartesian cordinates for position can be though of in the same way as 
