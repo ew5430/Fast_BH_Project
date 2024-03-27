@@ -3,11 +3,12 @@ extends CharacterBody2D
 @onready var sprite = $Sprite2D
 @onready var coll = $CollisionShape2D
 @onready var animation = $AnimationPlayer
+var unit_name : String
 
 @export var abilities : Array[Ability_Info]
 var ability_scene : Array[Object]
 var ability_cooldowns : Array[Timer]
-var world # Will be world space refernce
+var world = null # Will be world space refernce - not sure if necessary
 
 @export var max_hp : int
 @onready var curr_hp : int = max_hp
@@ -23,19 +24,17 @@ var world # Will be world space refernce
 
 signal remove_from_world(object)
 
-
 func get_tile_data_at(position: Vector2) -> TileData:
 	return world.tile_base.get_cell_tile_data(DataContainer.tile_layers.BACKGROUND, world.tile_base.local_to_map(position))
 
 
 func get_custom_data_at(position: Vector2, custom_data_name: String) -> Variant:
 	var data = get_tile_data_at(position)
-	if (data == null): return null
+	if (data == null): return -1
 	return data.get_custom_data(custom_data_name)
 
 func _physics_process(_delta):
 	apply_tile_effect(get_custom_data_at(position, "TerrainType"))
-	
 	
 	velocity = move_vec.normalized() * move_speed # delta not needed since move and slide already factors in time 
 	knock_back_applied = knock_back_applied.move_toward(Vector2.ZERO, knock_back_recovery)
@@ -91,11 +90,12 @@ func use_ability(index : int):
 
 # Setup that occurs after the world scene is fully loaded
 func post_load():
-	world = get_tree().get_first_node_in_group("world")
-	reload_abilities()
+	if world == null:
+		world = get_tree().get_first_node_in_group("world")
+		reload_abilities()
 
 func apply_tile_effect(tile_type : int):
-	print(tile_type)
+	#print(tile_type)
 	match tile_type:
 		1:
 			pass # TODO: 
@@ -105,4 +105,13 @@ func apply_tile_effect(tile_type : int):
 			move_speed = base_speed / 2.5
 		_:
 			move_speed = base_speed
-	print(move_speed)
+	#print(move_speed)
+
+func get_save_data():
+	return {"unit_name": self.unit_name,"position" : self.position, "curr_hp" : self.curr_hp, "curr_mana" : self.curr_mana}
+
+func set_properties(args_dict):
+	unit_name = args_dict["unit_name"]
+	position = args_dict["position"]
+	curr_hp = args_dict["curr_hp"]
+	curr_mana = args_dict["curr_mana"]

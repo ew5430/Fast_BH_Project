@@ -33,5 +33,25 @@ func shoot():
 func apply_tile_effect(tile_type : int):
 	match tile_type:
 		0:
-			return # TODO: move to new chunk
-	super(tile_type) 
+			var tile_limits : int = world.tile_base.tile_set.tile_size.x * world.level_size.x / 2
+			#print(position)
+			#print(tile_limits)
+			if (position.x > tile_limits):
+				world.create_new_chunk(Vector2(1,0))
+				$GUI/Control/Minimap.moveMap(Vector2(1,0))
+				position.x -= tile_limits * 1.9
+			elif (position.x < -tile_limits):
+				world.create_new_chunk(Vector2(-1,0))
+				$GUI/Control/Minimap.moveMap(Vector2(-1,0))
+				position.x += tile_limits * 1.9
+			elif (position.y > tile_limits):
+				world.create_new_chunk(Vector2(0,1))
+				$GUI/Control/Minimap.moveMap(Vector2(0,1))
+				position.y -= tile_limits * 1.9
+			elif (position.y < -tile_limits):
+				world.create_new_chunk(Vector2(0,-1))
+				$GUI/Control/Minimap.moveMap(Vector2(0,-1))
+				position.y += tile_limits * 1.9
+			return
+	super(tile_type)
+

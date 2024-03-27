@@ -6,19 +6,35 @@ enum tile_sets {
 	TERRAIN,
 }
 
+# TODO: change tile sets depending on the biome
+
 var moisture = FastNoiseLite.new()
 var temperature = FastNoiseLite.new()
 var altitude = FastNoiseLite.new()
+
+@onready var seen_chunks  = {}
 
 const EXIT_TILE : Vector2i = Vector2i(4,0)
 
 
 func _ready():
-	moisture.seed = randi()
-	temperature.seed = randi()
-	altitude.seed = randi()
+	#moisture.seed = randi()
+	#temperature.seed = randi()
+	#altitude.seed = randi()
+	pass
 	
-func generate_chunk(level_size: Vector2, camera_size: Vector2):
+func generate_chunk(curr_tile:Vector2, level_size: Vector2, camera_size: Vector2):
+	var seeds : Array
+	if curr_tile in seen_chunks:
+		seeds = seen_chunks[curr_tile]
+	else:
+		seeds = [randi(),randi(),randi()]
+		seen_chunks[curr_tile] = seeds
+	
+	moisture.seed = seeds[0]
+	temperature.seed = seeds[1]
+	altitude.seed = seeds[2]
+	
 	var xr = level_size.x
 	var yr = level_size.y
 	
@@ -38,7 +54,8 @@ func generate_chunk(level_size: Vector2, camera_size: Vector2):
 	for y in range(-1,yr+1):
 		set_cell(DataContainer.tile_layers.BACKGROUND,Vector2i(xr - cx, y - cy),tile_sets.WORLD, EXIT_TILE)
 		set_cell(DataContainer.tile_layers.BACKGROUND,Vector2i(-cx - 1, y - cy),tile_sets.WORLD, EXIT_TILE)
-		
+	
+	return [moisture.seed, temperature.seed, altitude.seed]
 	
 func unload_chunk(level_size: Vector2, camera_size: Vector2):
 	var xr = level_size.x

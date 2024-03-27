@@ -7,6 +7,7 @@ extends Node2D
 @onready var tile_base = $Tile_Base
 @onready var in_proj_base  = {} # Dictonary of attack nodes and how many users
 
+@onready var curr_chunk : Vector2 = Vector2(0,0)
 
 @export var level_size : Vector2 = Vector2(100,100)
 @export var camera_size : Vector2 = Vector2(100,100)
@@ -18,16 +19,19 @@ func _ready(): # Need to use postload since ready of children called before read
 	DataContainer.parse_enemies()
 	
 	print("Generating Level")
-	tile_base.generate_chunk(level_size,camera_size)
+	tile_base.generate_chunk(Vector2(0,0), level_size,camera_size)
 	print("Spawning Entites")
 	entity_base.spawn_player(Vector2(0,0))
-	entity_base.load_enemies("Forest",0)
-	entity_base.spawn_enemies(level_size,camera_size)
+	entity_base.load_enemies(Vector2(0,0), "Forest",0)
+	entity_base.spawn_enemies(Vector2(0,0), level_size,camera_size)
+	entity_base.call_post_load()
 	
-	print("Calling Post Load on Entities")
+	'''
+	print("Calling Post Load on Entities") #TODO: move to entity base
 	for e in entity_base.get_children():
 		e.connect("remove_from_world",_on_remove_from_world)
 		e.post_load()
+	'''
 	player = entity_base.get_child(0) # player will always be first child since spawned first
 	#tile_base.unload_chunk(level_size,camera_size)
 
@@ -59,3 +63,17 @@ func _on_remove_from_world(object: Object):
 	
 func _physics_process(delta):
 	pass
+
+func create_new_chunk(move_vec : Vector2):
+	print("Changing tiles")
+	
+	# for position, the cartesian cordinates for position can be though of in the same way as 
+	# a standard x y plane, with the center of the tile grid as (0,0)
+	entity_base.save_enemies(curr_chunk)
+	curr_chunk += move_vec
+	tile_base.generate_chunk(curr_chunk,level_size,camera_size)
+	
+	entity_base.load_enemies(curr_chunk,"Forest",max(abs(curr_chunk.x), abs(curr_chunk.y))) # TODO: change forest to get biome from data container
+	entity_base.spawn_enemies(curr_chunk,level_size,camera_size)
+	entity_base.call_post_load()
+	

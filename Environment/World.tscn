@@ -1150,5 +1150,6 @@ script = ExtResource("3_kxxga")
 
 [node name="Entity_Base" type="Node" parent="." groups=["entity_base"]]
 script = ExtResource("5_yo4ob")
+spawn_power = 1
 
 [node name="Projectile_Base" type="Node" parent="." groups=["projectile_base"]]

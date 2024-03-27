@@ -13,6 +13,7 @@ enum tile_layers {
 @onready var ENEMIES = {}
 var ENEMY_PROPERTIES : Array
 @onready var ABILITES = {}
+@onready var LOC_BIOME_PAIR = {} # TODO: fill this in with mappings from biome to locations
 
 func parse_enemies():
 	# Read data from csv and save into array
@@ -61,10 +62,10 @@ func enemies_parse_multi(index : int, item_list : Array, item_dict : Dictionary)
 			return true
 	return false
 
-func get_enemy(name : String) -> Array:
+func get_enemy(name : String) -> Array: # Returns array containing the properties of the enemy with the given name
 	return ENEMIES[name]
 
-func get_enemy_property_index(name : String) -> int:
+func get_enemy_property_index(name : String) -> int: # Returns index of property, if not found returns -2
 	return ENEMY_PROPERTIES.find(name) - 1 # Account for removal of name field
 
 func parse_abilites():

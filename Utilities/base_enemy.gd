@@ -11,8 +11,9 @@ var fix_curr_ai : bool = false
 
 @export var spawn_cost : int
 
-func spawn(spawn_loc : Vector2, misc_args : Array) -> Array[Object]: # Will be overridden in chilren
-	position = spawn_loc
+func spawn(unit_name: String, spawn_loc : Vector2, misc_args : Array) -> Array[Object]: # Will be overridden in chilren
+	self.position = spawn_loc
+	self.unit_name = unit_name
 	return [self]
 
 func _ready():

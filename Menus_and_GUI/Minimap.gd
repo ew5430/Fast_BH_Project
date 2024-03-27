@@ -27,7 +27,7 @@ func setup():
 
 func moveMap(move : Vector2):
 	for c in MapNodes.get_children():
-		c.position += move * tileIconSize
+		c.position -= move * tileIconSize
 	setVisibility()
 
 func setVisibility():
